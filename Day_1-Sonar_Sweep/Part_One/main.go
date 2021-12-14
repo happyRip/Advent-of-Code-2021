@@ -37,7 +37,7 @@ func getData(filePath string) []int {
 }
 
 func main() {
-	data := getData("data/input.txt")
+	data := getData("../input.txt")
 
 	var result int
 	for i := 1; i < len(data); i++ {
