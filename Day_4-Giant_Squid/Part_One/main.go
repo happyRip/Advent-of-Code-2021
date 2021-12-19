@@ -129,10 +129,24 @@ func (b *Bingo) getFromFile(filePath string) {
 func (b *Bingo) Play() {
 	for _, n := range b.numbers {
 		if won := b.mark(n); won >= 0 {
-			fmt.Println(won)
+			unmarked := b.sumUnmarked(won)
+			fmt.Println(unmarked * n)
 			return
 		}
 	}
+}
+
+func (b Bingo) sumUnmarked(n int) int {
+	var unmarked int
+	board, matched := b.boards[n], b.matched[n]
+	for i, row := range board {
+		for j, v := range row {
+			if !matched[i][j] {
+				unmarked += v
+			}
+		}
+	}
+	return unmarked
 }
 
 func lineToIntSlice(line string, separator string) []int {
@@ -153,8 +167,8 @@ func lineToIntSlice(line string, separator string) []int {
 
 func main() {
 	var bingo Bingo
-	// bingo.getFromFile("../input.txt")
-	bingo.getFromFile("test.txt")
+	bingo.getFromFile("../input.txt")
+	// bingo.getFromFile("test.txt")
 
 	bingo.Play()
 }
