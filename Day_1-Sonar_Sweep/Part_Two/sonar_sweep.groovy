@@ -8,7 +8,7 @@ class Sonar {
         }
 
         def triples = []
-        data[0..(data.size()-3)].eachWithIndex { _, i ->
+        data[0..-3].eachWithIndex { _, i ->
             triples.add(data[i..i+2].sum())
         }
 
